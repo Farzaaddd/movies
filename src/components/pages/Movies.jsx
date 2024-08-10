@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SearchBox from '../templates/SearchBox'
-import MovieCard from '../templates/MovieCard';
+
 import { GetPage } from '../../services/api';
 import { useMutation } from '@tanstack/react-query';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+
+import SearchBox from '../templates/SearchBox'
+import MovieCard from '../templates/MovieCard';
+import Loader from '../templates/Loader';
 
 
 const Movies = () => {
@@ -18,7 +21,7 @@ const Movies = () => {
   const [display, setDisplay] = useState([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(99);
-  const { mutate } = useMutation(GetPage);
+  const { mutate, isLoading } = useMutation(GetPage);
 
   useEffect(() => {
     !searchResults && navigate('/')
@@ -39,6 +42,8 @@ const Movies = () => {
       },
     });
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <>

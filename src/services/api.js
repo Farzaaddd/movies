@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://www.omdbapi.com/";
+const URL = "https://www.omdbapi.com/";
 const KEY = "67a71644";
 
 const GetTitle = (title) => axios.get(`${URL}?apikey=${KEY}&i=${title}`);

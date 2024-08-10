@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { removeMovie } from "../../features/movieProvider";
+
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import PublishIcon from '@mui/icons-material/Publish';
@@ -12,11 +14,9 @@ import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
 import styles from "./FavoritesCard.module.css"
-import { removeMovie } from "../../features/movieProvider";
 
 const FavoritesCard = ({movie}) => {
     const dispatch = useDispatch();
-    console.log(movie);
     
   return (
     <div className={styles.container}>

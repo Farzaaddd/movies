@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { GetDetails } from '../../services/api';
+import { createQueryObject, getInitialQuery } from '../../helper/helper';
+import Loader from './Loader';
+
 
 import { Button } from '@mui/joy';
 import GrainIcon from '@mui/icons-material/Grain';
 
 import "./FilterBox.css";
-import { createQueryObject, getInitialQuery } from '../../helper/helper';
 
 const FilterBox = ({ setDetails }) => {
   const [search, setSearch] = useState('');
@@ -18,7 +20,7 @@ const FilterBox = ({ setDetails }) => {
   const [query, setQuery] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
   
-  const { mutate } = useMutation(({ search, season, year, type }) =>
+  const { mutate, isLoading } = useMutation(({ search, season, year, type }) =>
     GetDetails(search, season, year, type)
   );
 
@@ -31,12 +33,10 @@ const FilterBox = ({ setDetails }) => {
     setType(initialQuery.type || '');
 
     if (initialQuery.search) {
-      console.log('Fetching data with:', initialQuery);
       mutate(
         { search: initialQuery.search, season: initialQuery.season, year: initialQuery.year, type: initialQuery.type },
         {
           onSuccess: (fetchedData) => {
-            console.log('API response:', fetchedData.data.Search);
             setDetails(fetchedData.data.Search);
           },
           onError: (error) => {
@@ -60,7 +60,6 @@ const FilterBox = ({ setDetails }) => {
     console.log('Triggering API call with:', { search, season, year, type });
     mutate({ search, season, year, type }, {
       onSuccess: (fetchedData) => {
-        console.log('API response:', fetchedData.data.Search);
         setDetails(fetchedData.data.Search);
       },
       onError: (error) => {
@@ -68,6 +67,8 @@ const FilterBox = ({ setDetails }) => {
       }
     });
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <form className="filter-form" onSubmit={FilterHandler}>

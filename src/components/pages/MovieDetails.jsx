@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { GetTitle } from '../../services/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMovie } from '../../features/movieProvider';
+import Loader from '../templates/Loader';
+
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import TopicIcon from '@mui/icons-material/Topic';
 import EditIcon from '@mui/icons-material/Edit';
@@ -15,15 +19,12 @@ import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import AnimationIcon from '@mui/icons-material/Animation';
 import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import "./MovieDetails.css"
-import { useDispatch, useSelector } from 'react-redux';
-import { addMovie } from '../../features/movieProvider';
-// import { useMovie } from '../../context/movieContext';
 
 const MovieDetails = () => {
     const [display, setDisplay] = useState(null)
     
     const { id } = useParams();
-    const { mutate } = useMutation(GetTitle);
+    const { mutate, isLoading} = useMutation(GetTitle);
 
     const state = useSelector(state => state.movie)
     const dispatch = useDispatch();
@@ -40,7 +41,8 @@ const MovieDetails = () => {
       });
     }, [id])
 
-
+  if (isLoading) return <Loader />;
+  
   return (
     <div>
         <div className='favorite-link'>

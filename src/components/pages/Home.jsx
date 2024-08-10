@@ -30,7 +30,6 @@ const Home = () => {
           </Button>
         </div>
         <Gallery/>
-        {/* <Search/> */}
     </div>
   )
 }

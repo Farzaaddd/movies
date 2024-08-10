@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { GetSearch } from '../../services/api';
+import Loader from './Loader';
+
 import { FilterAltSharp, Search } from '@mui/icons-material';
 import { Button } from '@mui/joy';
 import Input from '@mui/joy/Input';
-import { Link, useNavigate } from 'react-router-dom';
 
 const SearchBox = () => {
   const [search, setSearch] = useState('');
-  const { mutate } = useMutation(GetSearch);
+  const { mutate, isLoading } = useMutation(GetSearch);
   const navigate = useNavigate();
   
 
@@ -44,6 +46,8 @@ const SearchBox = () => {
       }
     });
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <form style={{ position: 'relative', textAlign: 'center', marginTop: '60px' }} onSubmit={SearchHandler}>
