@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SearchBox from '../templates/SearchBox'
 import MovieCard from '../templates/MovieCard';
 import { GetPage } from '../../services/api';
 import { useMutation } from '@tanstack/react-query';
 import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 
 const Movies = () => {
@@ -12,13 +13,15 @@ const Movies = () => {
   const location = useLocation();
   const { searchResults } = location.state || {};
   const search = location.state?.search
-
+  const navigate = useNavigate();
+  
   const [display, setDisplay] = useState([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(99);
   const { mutate } = useMutation(GetPage);
 
   useEffect(() => {
+    !searchResults && navigate('/')
     setDisplay(searchResults)
     setPage(1)
   }, [searchResults])
@@ -41,7 +44,7 @@ const Movies = () => {
     <>
     <SearchBox/>
       <div>
-        <h1>Search Results</h1>
+        <h1 style={{color: "#fff", paddingLeft: "30px"}}>Search Results</h1>
         {display ? (
           <div className="swiper">
             {display.map((movie, index) => (
@@ -49,12 +52,33 @@ const Movies = () => {
             ))}
           </div>
         ) : (
-          <h5> Not page found :( </h5>
+          <h5 style={{color: "#fff"}}> Not page found :( </h5>
         )}
 
       </div>
 
-    <Pagination count={Math.floor(total/10+1)} page={page} onChange={handleChange} />
+      <Stack spacing={2} sx={{ alignItems: 'center', margin: '20px 0' }}>
+      <Pagination 
+        count={Math.floor(total / 10 + 1)} 
+        variant="outlined" 
+        shape="rounded"  
+        size="large"
+        page={page} 
+        onChange={handleChange}
+        sx={{
+          '& .MuiPaginationItem-root': {
+            color: 'white', // Default color for inactive items
+            '&.Mui-selected': {
+              backgroundColor: 'primary.main', // Active item background color
+              color: 'black', // Active item text color
+            },
+            '&:hover': {
+              backgroundColor: 'rgba(255, 255, 255, 0.08)', // Hover effect
+            },
+          },
+        }} 
+      />
+    </Stack>
     </>
   );
 };

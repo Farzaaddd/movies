@@ -2,7 +2,7 @@
   margin-top: 50px;
   text-align: center;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .item {
@@ -19,4 +19,11 @@
 
 .item.expanded {
   width: 42vw; /* Expanded width */
+}
+
+@media screen and (max-width: 991px) {
+  .item {
+    width: 25vw; /* Default width */
+    height: 50vh;
+  }
 }

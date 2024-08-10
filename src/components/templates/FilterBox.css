@@ -1,6 +1,7 @@
 form.filter-form {
   margin-top: 50px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 form select {
@@ -15,11 +16,16 @@ select {
   border: 2px solid #ccc;
   border-radius: 5px;
   outline: none;
+  color: #ccc;
+}
+
+.same {
+  width: 75px;
 }
 
 input:focus,
 select:focus {
-  border-color: #03a9f4;
+  border-color: transparent;
 }
 
 @media screen and (min-width: 768px) {

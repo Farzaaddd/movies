@@ -12,37 +12,108 @@ svg {
   background-color: #050505;
 }
 
-.bg-container:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-}
-
 .display::before {
   content: "";
   display: table;
 }
 
+.favorite-link {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 10;
+}
+
+.favorite-link a {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #eb8307;
+}
+
+.favorite-link a:hover {
+  opacity: 0.6;
+  text-decoration: underline;
+}
+
 .display {
   color: #fff;
-  /* width: 970px; */
+  z-index: 22;
 }
 
-.holder {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 5%;
+@media screen and (max-width: 879px) {
+  .favorite-link {
+    margin-top: 10px;
+    top: 0px;
+  }
+
+  .cover {
+    width: 70%;
+  }
+
+  .cover .custom-img {
+    margin-top: 20px;
+    margin-left: 30%;
+  }
+
+  .bg-container:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .plot {
+    margin-left: 40px;
+  }
+
+  .meta-head .left-side {
+    margin-top: 30px;
+  }
 }
 
-.cover {
-  width: 30%;
+@media screen and (min-width: 880px) {
+  .holder {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  .cover {
+    width: 30%;
+  }
+
+  .cover .custom-img {
+    margin-left: 50px;
+  }
+
+  .bg-container:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .meta-items ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .meta-items ul li {
+    width: 48%;
+  }
 }
 
 .cover .custom-img {
@@ -53,7 +124,6 @@ svg {
   padding: 3px;
   border-radius: 10px;
   position: relative;
-  margin-left: 50px;
 }
 
 .cover .custom-img:hover .overlay {
@@ -63,6 +133,7 @@ svg {
   width: 100%;
   height: 100%;
   background-image: linear-gradient(170deg, #eb8307, transparent);
+  border-radius: 10px;
   position: absolute;
   top: 0%;
   left: 0%;
@@ -96,7 +167,7 @@ svg {
 .meta-head {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: space-between;
   align-items: center;
   flex-direction: row-reverse;
@@ -134,15 +205,7 @@ svg {
   color: #eb8307;
 }
 
-.meta-items ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .meta-items ul li {
-  width: 48%;
   font-size: 85%;
   line-height: 23px;
   margin-bottom: 25px;

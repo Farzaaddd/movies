@@ -71,16 +71,20 @@ const FilterBox = ({ setDetails }) => {
 
   return (
     <form className="filter-form" onSubmit={FilterHandler}>
-      <input placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} style={{ width: '100px' }} />
-      <input placeholder="Year" value={year} onChange={(e) => setYear(e.target.value)} style={{ width: '100px' }} />
-      <select value={type} onChange={(e) => setType(e.target.value.toLocaleLowerCase())} >
+      <input placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} style={{width: "130px",  borderColor: "#eb8307", backgroundColor: "#1a1e29", fontWeight: 800, textAlign: "center" }} />
+      <input className='same' placeholder="Year" value={year} onChange={(e) => setYear(e.target.value)} style={{ borderColor: "#eb8307", backgroundColor: "#1a1e29", fontWeight: 800, textAlign: "center" }} />
+      <select value={type} onChange={(e) => setType(e.target.value.toLocaleLowerCase())} style={{ borderColor: "#eb8307", backgroundColor: "#1a1e29", color: "grey", fontWeight: 800}} className='same'>
         <option value="Type" selected hidden> Type </option>
         <option value="movie"> Movie </option>
         <option value="series"> Series </option>
       </select>
-      <input placeholder="Season" type="number" min={1} disabled={type === "movie" || type === ""} value={season} onChange={(e) => setSeason(e.target.value)} style={{ width: "100px" }} />
+      <input className='same' placeholder="Season" type="number" min={1} disabled={type === "movie" || type === ""} value={season} onChange={(e) => setSeason(e.target.value)} style={{ borderColor: "#eb8307", backgroundColor: "#1a1e29", color: "grey", fontWeight: 800 }} />
 
-      <Button variant="outlined" color="neutral" sx={{ verticalAlign: 'bottom', borderWidth: '2px' }} type="submit">
+      <Button className='same' variant="outlined" color="neutral" sx={{ verticalAlign: 'bottom', borderWidth: '2px',  borderColor: "#eb8307", backgroundColor: "#1a1e29", color: "grey", fontWeight: 800 ,marginLeft: "5px", '&:active': {
+              outline: "none", border: "none" ,backgroundColor: "#1a1e29"
+            }, '&:hover': {
+              outline: "none", backgroundColor: "#131720"
+            },}} type="submit">
         <GrainIcon fontSize="xs" sx={{ fontSize: '22px' }} />
         Filter
       </Button>

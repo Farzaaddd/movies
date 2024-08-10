@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { GetTitle } from '../../services/api';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -6,17 +7,28 @@ import TopicIcon from '@mui/icons-material/Topic';
 import EditIcon from '@mui/icons-material/Edit';
 import Person4Icon from '@mui/icons-material/Person4';
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
-import DetailsIcon from '@mui/icons-material/Details';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LanguageIcon from '@mui/icons-material/Language';
 import PublicIcon from '@mui/icons-material/Public';
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
+import AnimationIcon from '@mui/icons-material/Animation';
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import "./MovieDetails.css"
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMovie } from '../../features/movieProvider';
+// import { useMovie } from '../../context/movieContext';
 
 const MovieDetails = () => {
     const [display, setDisplay] = useState(null)
+    
     const { id } = useParams();
     const { mutate } = useMutation(GetTitle);
+
+    const state = useSelector(state => state.movie)
+    const dispatch = useDispatch();
+    const IsCheck = state.saveList.find((i) => i.imdbID == id)
+
     useEffect(() => {
       mutate(id, {
         onSuccess: (fetchedData) => {
@@ -28,9 +40,12 @@ const MovieDetails = () => {
       });
     }, [id])
 
-    
+
   return (
     <div>
+        <div className='favorite-link'>
+          <Link to="/favorites"> Go to save list <BookmarkOutlinedIcon/> </Link>
+        </div>
       {display ? 
         <div className="bg-container" style={{ backgroundImage: `url(${display.Poster})`,}}>
         <div className="display">
@@ -39,14 +54,13 @@ const MovieDetails = () => {
               <div className="custom-img">
                 <img src={display.Poster} alt="image" />
                 <div className="overlay">
-                  <span className="badge">
-                    <FavoriteIcon color='primary' titleAccess='Add to list?'/>
+                  <span className="badge" onClick={() => dispatch(addMovie(display))}>
+                    <FavoriteIcon color={IsCheck ? "error" : "#e0e0e0"} titleAccess='Add to list?'/>
                   </span>
                 </div>
               </div>
             </div>
             <div className="meta">
-
               <div className="meta-head">
                 <div className="left-side">
                   <div className="rating">
@@ -76,6 +90,12 @@ const MovieDetails = () => {
                       <span className="genre"> <strong>Director:</strong> </span>
                       <span className="title"> {display.Director} </span>
                     </li>
+
+                    <li>
+                      <span className="icon"> <Person4Icon/> </span>
+                      <span className="genre"> <strong>Type:</strong> </span>
+                      <span className="title"> {display.Type} </span>
+                    </li>
                     
                     <li>
                       <span className="icon"> <EditIcon/> </span>
@@ -95,21 +115,33 @@ const MovieDetails = () => {
                       <span className="title"> {display.Runtime} </span>
                     </li>
 
+                    <li className="full">
+                      <span className="icon"> <TheaterComedyIcon/> </span>
+                      <span className="genre"> <strong>Actors:</strong> </span>
+                      <span className="title"> {display.Actors} </span>
+                    </li>
+
                     <li>
                       <span className="icon"> <LanguageIcon/> </span>
                       <span className="genre"> <strong>Languages:</strong> </span>
                       <span className="title"> {display.Language} </span>
                     </li>
 
-                    <li className="full">
-                      <span className="icon"> <TheaterComedyIcon/> </span>
-                      <span className="genre"> <strong>Actors:</strong> </span>
-                      <span className="title"> {display.Actors} </span>
+                    <li>
+                      <span className="icon"> <MilitaryTechIcon/> </span>
+                      <span className="genre"> <strong>Awards:</strong> </span>
+                      <span className="title"> {display.Awards} </span>
                     </li>
+
+                    {display.totalSeasons && <li>
+                      <span className="icon"> <AnimationIcon/> </span>
+                      <span className="genre"> <strong>Seasons:</strong> </span>
+                      <span className="title"> {display.totalSeasons} </span>
+                    </li>}
                 </ul>
 
                 <div className="plot">
-                  <p> <DetailsIcon/> <strong>Plot:</strong> {display.Plot} </p>
+                  <p> <FormatQuoteIcon/> <strong>Plot:</strong> {display.Plot} </p>
                 </div>
               </div>
             </div>

@@ -4,7 +4,7 @@ import { GetSearch } from '../../services/api';
 import { FilterAltSharp, Search } from '@mui/icons-material';
 import { Button } from '@mui/joy';
 import Input from '@mui/joy/Input';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SearchBox = () => {
   const [search, setSearch] = useState('');
@@ -47,13 +47,13 @@ const SearchBox = () => {
 
   return (
     <form style={{ position: 'relative', textAlign: 'center', marginTop: '60px' }} onSubmit={SearchHandler}>
-      <Button variant="outlined" color="plain" sx={{ verticalAlign: 'bottom', position: 'absolute', top: '20%', left: '16%', zIndex: 1, backgroundColor: 'grey', minHeight: '0', paddingBlock: '0', paddingInline: '3px 9px' }}>
-        <FilterAltSharp fontSize="xs" sx={{ fontSize: '22px' }} />
-        <Link to="/filter" style={{ textDecoration: 'none', color: '#000' }}> filter </Link>
+      <Button variant="outlined" color="plain" sx={{ verticalAlign: 'bottom', position: 'absolute', top: '20%', left: '16%', zIndex: 1, backgroundColor: '#1a1e29', minHeight: '0', paddingBlock: '0', paddingInline: '3px 9px', borderRadius: 12}}>
+        <FilterAltSharp fontSize="xs" sx={{ fontSize: '22px', color: '#eb8307' }} />
+        <Link to="/filter" style={{ textDecoration: 'none', color: '#fff' }}> filter </Link>
       </Button>
-      <Input placeholder="Search movies…" name='input-search' variant="outlined" color="neutral" value={search} onChange={(e) => setSearch(e.target.value)} sx={{ width: '70%', display: 'inline-block', borderWidth: '2px', fontSize: '14px', paddingLeft: '80px', paddingTop: '5px', borderRadius: '35px' }} />
+      <Input placeholder="Search movies…" name='input-search' variant="outlined" value={search} onChange={(e) => setSearch(e.target.value)} sx={{ width: '70%', display: 'inline-block', borderWidth: '2px', fontSize: '14px', paddingLeft: '80px', paddingTop: '5px', borderRadius: '35px', backgroundColor: '#1a1e29', color: "#fff" ,border: "2px solid #eb8307" }} />
       <Button variant="outlined" color="plain" sx={{ verticalAlign: 'bottom', position: 'absolute', right: '15%' }} type="submit">
-        <Search fontSize="xs" sx={{ fontSize: '22px' }} />
+        <Search fontSize="xs" sx={{ fontSize: '24px', color: "#eb8307" }} />
       </Button>
     </form>
   );

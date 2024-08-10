@@ -98,13 +98,26 @@
 
 @media screen and (max-width: 768px) {
   .swiper-slide {
-    width: 150px;
-    height: 15rem;
-    margin: 10px 2px;
+    width: 250px;
+    height: 25rem;
+    /* margin: 10px 2px; */
   }
 
   .movie-details .custom-details {
     margin-right: 5px;
+  }
+
+  .swiper-slide span:nth-child(2) {
+    top: 40%;
+    left: 200px;
+  }
+
+  .movie-details {
+    text-align: center;
+  }
+
+  .movie-details h4 {
+    color: #fff;
   }
 }
 
@@ -124,6 +137,7 @@
   }
 
   .movie-details h4 {
+    color: #fff;
     margin-left: 15px;
   }
 }
