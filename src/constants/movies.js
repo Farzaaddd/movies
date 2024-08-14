@@ -184,12 +184,13 @@ const suggestedMovies = [
       "https://m.media-amazon.com/images/M/MV5BMzJhYjE3NjctMGUzMC00YjVhLTkzYzAtNzhmMWU0ZDBlYzJmXkEyXkFqcGdeQXVyNDI3NjU1NzQ@._V1_SX300.jpg",
   },
   {
-    Title: "Tehran Taboo",
-    Year: "2017",
-    imdbID: "tt5584796",
+    Title:
+      "The Voice of Iran: Mohammad Reza Shajarian - The Copenhagen Concert 2002",
+    Year: "2003",
+    imdbID: "tt0458199",
     Type: "movie",
     Poster:
-      "https://m.media-amazon.com/images/M/MV5BODgwNDJjMDktNDI3Yy00NDk4LThhODItMDUyNDIyOGU2YjVlXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_SX300.jpg",
+      "https://m.media-amazon.com/images/M/MV5BNGU0NzdlODEtY2ViYS00MWY1LTk2ZTUtYTE0MTU1NjA5NGYyXkEyXkFqcGdeQXVyMTk0ODE3Mzc@._V1_SX300.jpg",
   },
   {
     Title: "Squid Game",
